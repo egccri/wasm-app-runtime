@@ -6,4 +6,15 @@ wasmtime module.
 
 Wasi preview1 different with preview2? 
 Wasi standard changed, how rust compiler also need change?
+Wasi func store where in wasm binary?
 
+How to add a pub/sub support with rust and wasmtime?
+
++ design a `pub/sub` protocol base tcp
++ consider use wasi support io function
++ use a wit file to describe `pub/sub` interface
++ use `wit-bindgen` generate bindgen code 
++ impl `pub/sub` with bindgen code
++ link `pub/sub` component to wasmtime
++ write a crate with main to use pub/sub 
++ support run wasm with cmd
