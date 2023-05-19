@@ -16,5 +16,6 @@ How to add a pub/sub support with rust and wasmtime?
 + use `wit-bindgen` generate bindgen code 
 + impl `pub/sub` with bindgen code
 + link `pub/sub` component to wasmtime
-+ write a crate with main to use pub/sub 
++ give a sdk use extend 'C' to compile rust to target `wasm32-wasi`
++ write a crate with main to use `pub/sub` sdk
 + support run wasm with cmd
