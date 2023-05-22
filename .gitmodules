@@ -1,0 +1,3 @@
+[submodule "wasi-messaging"]
+	path = wit/wasi-messaging
+	url = git@github.com:WebAssembly/wasi-messaging.git
