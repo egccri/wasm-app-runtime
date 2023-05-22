@@ -5,6 +5,18 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[workspace]
+members = [
+    "crates/runtime-core",
+    "crates/runtime-wasi-messaging",
+    "sdk/rust",
+]
+
 [dependencies]
-wasmtime = "8.0.0"
-wasmtime-wasi = "8.0.0"
+wasmtime = { workspace = true }
+wasmtime-wasi = { workspace = true }
+
+[workspace.dependencies]
+wasmtime = { version = "8.0.1", features = ["component-model"] }
+wasmtime-wasi = { version = "8.0.1", features = ["tokio"] }
+# wasi-common = { git = "https://github.com/bytecodealliance/preview2-prototyping" }

@@ -1,14 +1,12 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+use crate::handler::{Error, Event};
+wit_bindgen::generate!({path: "../../wit/wasi-messaging/wit"});
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+struct EgccriMessaging;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+impl handler::Handler for EgccriMessaging {
+    fn on_receive(e: Event) -> Result<(), Error> {
+        todo!()
     }
 }
+
+export_messaging!(EgccriMessaging);
