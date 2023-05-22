@@ -3,10 +3,10 @@ An experimental runtime.
 
 Wasi include in wasm-component(contains interface type), define in wit file, then use linker link to the 
 wasmtime module.
-
+c
 Wasi preview1 different with preview2? 
-Wasi standard changed, how rust compiler also need change?
-Wasi func store where in wasm binary?
+Wasi standard changed, how rust compiler also need change? watch lib/sys/wasi.
+Wasi func store where in wasm binary? import section.
 
 How to add a pub/sub support with rust and wasmtime?
 
