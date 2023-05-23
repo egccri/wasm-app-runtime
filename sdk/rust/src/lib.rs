@@ -1,4 +1,5 @@
 use crate::handler::{Error, Event};
+use crate::producer::publish;
 wit_bindgen::generate!({path: "../../wit/wasi-messaging/wit"});
 
 struct EgccriMessaging;
