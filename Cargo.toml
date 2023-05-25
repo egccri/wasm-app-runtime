@@ -13,10 +13,14 @@ members = [
 ]
 
 [dependencies]
+runtime-core = { path = "crates/runtime-core" }
+runtime-wasi-messaging = { path = "crates/runtime-wasi-messaging" }
 wasmtime = { workspace = true }
 wasmtime-wasi = { workspace = true }
+tokio = { workspace = true }
 
 [workspace.dependencies]
 wasmtime = { version = "8.0.1", features = ["component-model"] }
 wasmtime-wasi = { version = "8.0.1", features = ["tokio"] }
+tokio = { version = "1.21.2", features = ["full"] }
 # wasi-common = { git = "https://github.com/bytecodealliance/preview2-prototyping" }

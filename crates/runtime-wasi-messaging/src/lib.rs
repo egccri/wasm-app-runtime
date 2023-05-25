@@ -1,3 +1,4 @@
+use wasmtime::component::Linker;
 use crate::consumer::{Broker, Channel, Error, SubscriptionToken};
 use crate::producer::Event;
 
@@ -7,7 +8,13 @@ wasmtime::component::bindgen!({
     async: true
 });
 
-struct WasmtimeMessaging;
+pub struct WasmtimeMessaging;
+
+impl WasmtimeMessaging {
+    pub fn add_to_linker(&self, linker: &mut Linker<Self>) {
+        self::messaging_types::add_to_linker(mut linker, |self: &mut Self| {self})
+    }
+}
 
 #[async_trait::async_trait]
 impl consumer::Host for WasmtimeMessaging {
