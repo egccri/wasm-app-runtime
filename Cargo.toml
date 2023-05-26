@@ -10,17 +10,23 @@ members = [
     "crates/runtime-core",
     "crates/runtime-wasi-messaging",
     "sdk/rust",
+    "guest"
 ]
 
 [dependencies]
 runtime-core = { path = "crates/runtime-core" }
 runtime-wasi-messaging = { path = "crates/runtime-wasi-messaging" }
-wasmtime = { workspace = true }
-wasmtime-wasi = { workspace = true }
+#wasmtime = { workspace = true }
+#wasmtime-wasi = { workspace = true }
 tokio = { workspace = true }
 
 [workspace.dependencies]
-wasmtime = { version = "8.0.1", features = ["component-model"] }
-wasmtime-wasi = { version = "8.0.1", features = ["tokio"] }
+# wait wasmtime version 10 publish.
+wasmtime = { git = "https://github.com/bytecodealliance/wasmtime", rev = "3b90faf4a7715a66e1b7298d50300d235604cf50", features = ["component-model"] }
+wasmtime-wasi = { git = "https://github.com/bytecodealliance/wasmtime", rev = "3b90faf4a7715a66e1b7298d50300d235604cf50", features = ["tokio"] }
 tokio = { version = "1.21.2", features = ["full"] }
-# wasi-common = { git = "https://github.com/bytecodealliance/preview2-prototyping" }
+#host = { package = "host", git = "https://github.com/bytecodealliance/preview2-prototyping" }
+#wasmtime = { version = "6.0.0", features = ["component-model"] }
+#wasi-common = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
+#wasi-cap-std-sync = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
+#host = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
