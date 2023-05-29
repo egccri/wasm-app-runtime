@@ -1,5 +1,5 @@
 /// An interface grouping all necessary types for messaging.
-default interface messaging-types {
+interface messaging-types {
     /// A broker type that allows the exchange of messages.
     type broker = u32
     drop-broker: func(b: broker)

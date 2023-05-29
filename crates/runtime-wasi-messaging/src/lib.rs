@@ -1,12 +1,7 @@
-use crate::consumer::{Broker, Channel, Error, SubscriptionToken};
-use crate::producer::Event;
+use crate::wasi::messaging::{consumer, messaging_types, producer};
 use wasmtime::component::Linker;
 
-wasmtime::component::bindgen!({
-    path: "../../wit/wasi-messaging/wit",
-    world: "messaging",
-    async: true
-});
+wasmtime::component::bindgen!({path: "../../wit/wasi-messaging/wit", async: true});
 
 #[derive(Debug, Clone)]
 pub struct WasmtimeMessaging;
@@ -29,18 +24,18 @@ impl WasmtimeMessaging {
 impl consumer::Host for WasmtimeMessaging {
     async fn subscribe(
         &mut self,
-        b: Broker,
-        c: Channel,
-    ) -> wasmtime::Result<Result<SubscriptionToken, Error>> {
+        b: consumer::Broker,
+        c: consumer::Channel,
+    ) -> wasmtime::Result<Result<consumer::SubscriptionToken, consumer::Error>> {
         println!(">>> called subscribe");
         Ok(Ok("".to_string()))
     }
 
     async fn unsubscribe(
         &mut self,
-        b: Broker,
-        st: SubscriptionToken,
-    ) -> wasmtime::Result<Result<(), Error>> {
+        b: consumer::Broker,
+        st: consumer::SubscriptionToken,
+    ) -> wasmtime::Result<Result<(), consumer::Error>> {
         println!(">>> called unsubscribe");
         Ok(Ok(()))
     }
@@ -52,7 +47,7 @@ impl producer::Host for WasmtimeMessaging {
         &mut self,
         b: producer::Broker,
         c: producer::Channel,
-        e: Event,
+        e: producer::Event,
     ) -> wasmtime::Result<Result<(), producer::Error>> {
         println!(">>> called publish");
         Ok(Ok(()))

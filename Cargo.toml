@@ -22,10 +22,10 @@ tokio = { workspace = true }
 
 [workspace.dependencies]
 # wait wasmtime version 10 publish.
-wasmtime = { git = "https://github.com/bytecodealliance/wasmtime", rev = "3b90faf4a7715a66e1b7298d50300d235604cf50", features = ["component-model"] }
-wasmtime-wasi = { git = "https://github.com/bytecodealliance/wasmtime", rev = "3b90faf4a7715a66e1b7298d50300d235604cf50", features = ["tokio"] }
+wasmtime = { git = "https://github.com/bytecodealliance/wasmtime", rev = "f3a7f631836bca3297cc9fd26d8eb7176519d306", features = ["component-model"] }
+wasmtime-wasi = { git = "https://github.com/bytecodealliance/wasmtime", rev = "f3a7f631836bca3297cc9fd26d8eb7176519d306", features = ["tokio"] }
 tokio = { version = "1.21.2", features = ["full"] }
-#host = { package = "host", git = "https://github.com/bytecodealliance/preview2-prototyping" }
+wit-bindgen = "0.7.0"
 #wasmtime = { version = "6.0.0", features = ["component-model"] }
 #wasi-common = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
 #wasi-cap-std-sync = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }

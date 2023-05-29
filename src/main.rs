@@ -1,8 +1,7 @@
 use runtime_core::component::Component;
-use runtime_core::preview2::clocks::host;
-use runtime_core::preview2::wasi;
-use runtime_core::{component, Config, Engine, Store, Wasi, WasiCtx};
-use runtime_wasi_messaging::handler::Event;
+use runtime_core::preview2::{wasi, WasiView};
+use runtime_core::{component, Config, Engine, Store, Table, Wasi, WasiCtx};
+use runtime_wasi_messaging::exports::wasi::messaging::handler::Event;
 use runtime_wasi_messaging::{Messaging, WasmtimeMessaging};
 use std::error::Error;
 
@@ -17,22 +16,23 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let engine = Engine::new(&config)?;
 
-    let wasi = Wasi::build().wasi_ctx();
+    let wasi = Wasi::build();
     let wasi_messaging = WasmtimeMessaging;
 
-    let mut store = Store::new(&engine, (wasi, wasi_messaging));
+    let ctx = Ctx {
+        wasi,
+        wasi_messaging,
+    };
+
+    let mut store = Store::new(&engine, ctx);
 
     // link wasi standard and wasi-messaging host functions.
     // what different between linker and component linker?
-    let mut linker = component::Linker::<WasiCtx>::new(&engine);
-    // TODO wait preview2 impl WasiView
+    let mut linker = component::Linker::<Ctx>::new(&engine);
     wasi::command::add_to_linker(&mut linker).unwrap();
 
-    let mut linker = component::Linker::<WasmtimeMessaging>::new(&engine);
-    WasmtimeMessaging::add_to_linker(
-        &mut linker,
-        |mut wasmtime_messaging: &mut WasmtimeMessaging| &mut wasmtime_messaging,
-    );
+    let mut linker = component::Linker::<Ctx>::new(&engine);
+    WasmtimeMessaging::add_to_linker(&mut linker, |ctx: &mut Ctx| &mut ctx.wasi_messaging);
 
     // initial guest component.
     let component = Component::from_file(&engine, "guest.component.wasm")?;
@@ -53,11 +53,34 @@ async fn main() -> Result<(), Box<dyn Error>> {
     };
 
     let res = messaging
-        .handler()
+        .wasi_messaging_handler()
         .call_on_receive(&mut store, &new_event)
         .await?;
 
     println!(">>> called on_receive: {:#?}", res);
 
     Ok(())
+}
+
+pub struct Ctx {
+    wasi: Wasi,
+    wasi_messaging: WasmtimeMessaging,
+}
+
+impl WasiView for Ctx {
+    fn table(&self) -> &Table {
+        self.wasi.table()
+    }
+
+    fn table_mut(&mut self) -> &mut Table {
+        self.wasi.table_mut()
+    }
+
+    fn ctx(&self) -> &WasiCtx {
+        self.wasi.ctx()
+    }
+
+    fn ctx_mut(&mut self) -> &mut WasiCtx {
+        self.wasi.ctx_mut()
+    }
 }

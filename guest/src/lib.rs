@@ -1,8 +1,7 @@
-use egccri_rust::consumer::Error;
-use egccri_rust::handler;
-use egccri_rust::handler::Event;
-use egccri_rust::messaging_types::{open_broker, Channel};
-use egccri_rust::producer::publish;
+use egccri_rust::exports::wasi::messaging::handler;
+use egccri_rust::exports::wasi::messaging::handler::{Error, Event};
+use egccri_rust::wasi::messaging::messaging_types::open_broker;
+use egccri_rust::wasi::messaging::producer::{publish, Channel};
 
 struct EgccriMessaging;
 

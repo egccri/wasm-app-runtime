@@ -1,4 +1,6 @@
-default interface streams {
+package wasi:io
+
+interface streams {
     /// An error type returned from a stream operation. Currently this
     /// doesn't provide any additional information.
     record stream-error {}

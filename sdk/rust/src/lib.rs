@@ -1,2 +1,2 @@
-wit_bindgen::generate!({path: "../../wit/wasi-messaging/wit"});
+wit_bindgen::generate!("messaging" in "../../wit/wasi-messaging/wit");
 // do help things here.
