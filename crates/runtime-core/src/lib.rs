@@ -1,8 +1,15 @@
 use std::borrow::BorrowMut;
+use std::path::PathBuf;
 pub use wasmtime::*;
 pub use wasmtime_wasi::preview2::{Table, WasiCtx};
 use wasmtime_wasi::preview2::{WasiCtxBuilder, WasiView};
 pub use wasmtime_wasi::*;
+
+pub struct Engine {
+    inner: wasmtime::Engine,
+    wasi: Wasi,
+}
+
 
 pub struct Wasi {
     wasi_ctx: WasiCtx,
@@ -35,4 +42,9 @@ impl WasiView for Wasi {
     fn ctx_mut(&mut self) -> &mut WasiCtx {
         &mut self.wasi_ctx
     }
+}
+
+pub enum ComponentSource {
+    Registry(String),
+    Local(PathBuf),
 }

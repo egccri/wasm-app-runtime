@@ -4,8 +4,18 @@ use runtime_core::{component, Config, Engine, Store, Table, Wasi, WasiCtx};
 use runtime_wasi_messaging::exports::wasi::messaging::handler::Event;
 use runtime_wasi_messaging::{Messaging, WasmtimeMessaging};
 use std::error::Error;
+use crate::commands::apply::ApplyCommand;
 
-mod cli;
+pub mod commands;
+
+/// Runtime is a sub command of Egccri, it's used to deploy wasm components to the egccri
+#[derive(clap::Parser, Debug)]
+#[command(author, version, about, long_about = None)] // Read from `Cargo.toml`
+enum Runtime {
+    /// apply command
+    #[command(subcommand)]
+    Apply(ApplyCommand)
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
@@ -31,12 +41,14 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let mut linker = component::Linker::<Ctx>::new(&engine);
     wasi::command::add_to_linker(&mut linker).unwrap();
 
-    let mut linker = component::Linker::<Ctx>::new(&engine);
     WasmtimeMessaging::add_to_linker(&mut linker, |ctx: &mut Ctx| &mut ctx.wasi_messaging);
 
     // initial guest component.
     let component = Component::from_file(&engine, "guest.component.wasm")?;
-    let (messaging, _) = Messaging::instantiate_async(&mut store, &component, &linker).await?;
+    let instance_pre = linker.instantiate_pre(&component);
+
+    // instantiate
+    let (messaging, _) = Messaging::instantiate_pre(&mut store, &instance_pre).await?;
 
     // call guest component from host
     let new_event = Event {

@@ -16,9 +16,8 @@ members = [
 [dependencies]
 runtime-core = { path = "crates/runtime-core" }
 runtime-wasi-messaging = { path = "crates/runtime-wasi-messaging" }
-#wasmtime = { workspace = true }
-#wasmtime-wasi = { workspace = true }
 tokio = { workspace = true }
+clap = { version = "4", features = ["derive"] }
 
 [workspace.dependencies]
 # wait wasmtime version 10 publish.
