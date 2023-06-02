@@ -8,6 +8,7 @@ edition = "2021"
 [workspace]
 members = [
     "crates/runtime-core",
+    "crates/runtime-invoker",
     "crates/runtime-wasi-messaging",
     "sdk/rust",
     "guest"
