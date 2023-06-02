@@ -9,6 +9,7 @@ edition = "2021"
 members = [
     "crates/runtime-core",
     "crates/runtime-invoker",
+    "crates/runtime-registry",
     "crates/runtime-wasi-messaging",
     "sdk/rust",
     "guest"
@@ -26,6 +27,7 @@ wasmtime = { git = "https://github.com/bytecodealliance/wasmtime", rev = "f3a7f6
 wasmtime-wasi = { git = "https://github.com/bytecodealliance/wasmtime", rev = "f3a7f631836bca3297cc9fd26d8eb7176519d306", features = ["tokio"] }
 tokio = { version = "1.21.2", features = ["full"] }
 wit-bindgen = "0.7.0"
+warg-cli = { git = "https://github.com/bytecodealliance/registry" }
 #wasmtime = { version = "6.0.0", features = ["component-model"] }
 #wasi-common = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
 #wasi-cap-std-sync = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
