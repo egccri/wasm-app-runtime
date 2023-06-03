@@ -1,8 +1,8 @@
-use runtime_core::component::Component;
-use runtime_core::preview2::{wasi, WasiView};
-use runtime_core::{component, Config, Engine, Store, Table, Wasi, WasiCtx};
-use runtime_wasi_messaging::exports::wasi::messaging::handler::Event;
-use runtime_wasi_messaging::{Messaging, WasmtimeMessaging};
+use runtime::component::Component;
+use runtime::preview2::{wasi, WasiView};
+use runtime::{component, Config, Engine, Store, Table, Wasi, WasiCtx};
+use wasi_messaging::exports::wasi::messaging::handler::Event;
+use wasi_messaging::{Messaging, WasmtimeMessaging};
 use std::error::Error;
 use crate::commands::apply::ApplyCommand;
 
@@ -13,7 +13,6 @@ pub mod commands;
 #[command(author, version, about, long_about = None)] // Read from `Cargo.toml`
 enum Runtime {
     /// apply command
-    #[command(subcommand)]
     Apply(ApplyCommand)
 }
 
@@ -43,9 +42,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     WasmtimeMessaging::add_to_linker(&mut linker, |ctx: &mut Ctx| &mut ctx.wasi_messaging);
 
-    // initial guest component.
+    // initial guest component and pre instantiate.
     let component = Component::from_file(&engine, "guest.component.wasm")?;
-    let instance_pre = linker.instantiate_pre(&component);
+    let instance_pre = linker.instantiate_pre(&component).unwrap();
 
     // instantiate
     let (messaging, _) = Messaging::instantiate_pre(&mut store, &instance_pre).await?;

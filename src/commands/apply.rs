@@ -1,7 +1,9 @@
 use std::path::PathBuf;
 
-#[derive(clap::Subcommand, Debug)]
+/// apply command
+#[derive(clap::Parser, Debug)]
 pub struct ApplyCommand {
+    /// apply file path
     file: PathBuf
 }
 

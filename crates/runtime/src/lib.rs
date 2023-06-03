@@ -8,16 +8,16 @@ pub use wasmtime_wasi::preview2::{Table, WasiCtx};
 use wasmtime_wasi::preview2::{WasiCtxBuilder, WasiView};
 pub use wasmtime_wasi::*;
 
-pub struct Engine {
-    inner: wasmtime::Engine,
+pub struct RuntimeEngine {
+    inner: Engine,
     wasi: Wasi,
     // hold linker here.
     linker: component::Linker<()>,
 }
 
 // hold Config here
-pub struct Config {
-    inner: wasmtime::Config,
+pub struct RuntimeConfig {
+    inner: Config,
 }
 
 

@@ -7,17 +7,17 @@ edition = "2021"
 
 [workspace]
 members = [
-    "crates/runtime-core",
-    "crates/runtime-invoker",
-    "crates/runtime-registry",
-    "crates/runtime-wasi-messaging",
+    "crates/runtime",
+    "crates/invoker",
+    "crates/registry",
+    "crates/wasi-messaging",
     "sdk/rust",
     "guest"
 ]
 
 [dependencies]
-runtime-core = { path = "crates/runtime-core" }
-runtime-wasi-messaging = { path = "crates/runtime-wasi-messaging" }
+runtime = { path = "crates/runtime" }
+wasi-messaging = { path = "crates/wasi-messaging" }
 tokio = { workspace = true }
 clap = { version = "4", features = ["derive"] }
 
