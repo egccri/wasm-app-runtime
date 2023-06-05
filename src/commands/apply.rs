@@ -4,7 +4,7 @@ use std::path::PathBuf;
 #[derive(clap::Parser, Debug)]
 pub struct ApplyCommand {
     /// apply file path
-    file: PathBuf
+    file: PathBuf,
 }
 
 impl ApplyCommand {

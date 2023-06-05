@@ -1,10 +1,10 @@
+use crate::commands::apply::ApplyCommand;
 use runtime::component::Component;
-use runtime::preview2::{wasi, WasiView};
-use runtime::{component, Config, Engine, Store, Table, Wasi, WasiCtx};
+use runtime::preview2::{wasi, Table, WasiCtx, WasiView};
+use runtime::{component, Config, Engine, Store, Wasi};
+use std::error::Error;
 use wasi_messaging::exports::wasi::messaging::handler::Event;
 use wasi_messaging::{Messaging, WasmtimeMessaging};
-use std::error::Error;
-use crate::commands::apply::ApplyCommand;
 
 pub mod commands;
 
@@ -13,7 +13,7 @@ pub mod commands;
 #[command(author, version, about, long_about = None)] // Read from `Cargo.toml`
 enum Runtime {
     /// apply command
-    Apply(ApplyCommand)
+    Apply(ApplyCommand),
 }
 
 #[tokio::main]

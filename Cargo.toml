@@ -36,6 +36,9 @@ warg-cli = { git = "https://github.com/curtiseng/registry.git", branch = "update
 tonic = "0.9.2"
 prost = "0.11.9"
 tonic-build = "0.9.2"
+thiserror = "1.0.37"
+anyhow = "1.0.65"
+tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["local-time"] }
 console-subscriber = { version = "0.1.8" }
 tracing-appender = "0.2"

@@ -1,55 +1,29 @@
-mod store;
 mod app;
+mod host;
 mod registry;
+mod store;
 
-use std::borrow::BorrowMut;
+// Re-export for the main demo, remove this later.
 pub use wasmtime::*;
-pub use wasmtime_wasi::preview2::{Table, WasiCtx};
-use wasmtime_wasi::preview2::{WasiCtxBuilder, WasiView};
 pub use wasmtime_wasi::*;
 
-pub struct RuntimeEngine {
+// Export here.
+pub use crate::host::{HostComponent, HostData};
+pub use crate::store::{Context, Wasi};
+
+#[derive(thiserror::Error, Debug, PartialEq)]
+pub enum RuntimeError {
+    #[error("Host linker error")]
+    HostLinkerError,
+}
+
+pub struct RuntimeEngine<T> {
     inner: Engine,
-    wasi: Wasi,
     // hold linker here.
-    linker: component::Linker<()>,
+    linker: component::Linker<T>,
 }
 
 // hold Config here
 pub struct RuntimeConfig {
     inner: Config,
-}
-
-
-pub struct Wasi {
-    wasi_ctx: WasiCtx,
-    table: Table,
-}
-
-impl Wasi {
-    pub fn build() -> Self {
-        let mut table = Table::new();
-        Wasi {
-            wasi_ctx: WasiCtxBuilder::new().build(table.borrow_mut()).unwrap(),
-            table,
-        }
-    }
-}
-
-impl WasiView for Wasi {
-    fn table(&self) -> &Table {
-        &self.table
-    }
-
-    fn table_mut(&mut self) -> &mut Table {
-        &mut self.table
-    }
-
-    fn ctx(&self) -> &WasiCtx {
-        &self.wasi_ctx
-    }
-
-    fn ctx_mut(&mut self) -> &mut WasiCtx {
-        &mut self.wasi_ctx
-    }
 }
