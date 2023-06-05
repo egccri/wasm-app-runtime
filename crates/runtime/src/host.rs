@@ -1,5 +1,5 @@
-use crate::{Context, RuntimeError};
 /// Util that help add host component.
+use crate::{Context, RuntimeError};
 use wasmtime::component::Linker;
 
 pub struct HostData {}

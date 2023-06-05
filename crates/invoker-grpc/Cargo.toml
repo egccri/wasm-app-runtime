@@ -9,6 +9,8 @@ edition = "2021"
 invoker = { path = "../invoker" }
 tonic = { workspace = true }
 prost = { workspace = true }
+async-trait = { workspace = true }
+thiserror = { workspace = true }
 
 [build-dependencies]
 tonic-build = { workspace = true }

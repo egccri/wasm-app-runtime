@@ -9,6 +9,10 @@ use crate::host::HostData;
 use wasmtime::StoreLimits;
 use wasmtime_wasi::preview2::{Table, WasiCtx, WasiCtxBuilder, WasiView};
 
+pub struct Store<T> {
+    inner: wasmtime::Store<Context<T>>,
+}
+
 pub struct Context<T> {
     inner: T,
     wasi: Wasi,

@@ -1,20 +1,9 @@
-use crate::commands::apply::ApplyCommand;
 use runtime::component::Component;
 use runtime::preview2::{wasi, Table, WasiCtx, WasiView};
 use runtime::{component, Config, Engine, Store, Wasi};
 use std::error::Error;
 use wasi_messaging::exports::wasi::messaging::handler::Event;
 use wasi_messaging::{Messaging, WasmtimeMessaging};
-
-pub mod commands;
-
-/// Runtime is a sub command of Egccri, it's used to deploy wasm components to the egccri
-#[derive(clap::Parser, Debug)]
-#[command(author, version, about, long_about = None)] // Read from `Cargo.toml`
-enum Runtime {
-    /// apply command
-    Apply(ApplyCommand),
-}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {

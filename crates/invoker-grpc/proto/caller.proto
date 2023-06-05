@@ -1,0 +1,12 @@
+syntax = "proto3";
+package caller;
+
+import "google/protobuf/empty.proto";
+
+service Caller {
+  rpc call(CallRequest) returns (google.protobuf.Empty);
+}
+
+message CallRequest {
+  int32 action = 1;
+}

@@ -1,4 +1,5 @@
 /// Execute when invoker invoked.
+#[async_trait::async_trait]
 pub trait InvokerExecutable {
     type RuntimeData: Default + Send + Sync + 'static;
 

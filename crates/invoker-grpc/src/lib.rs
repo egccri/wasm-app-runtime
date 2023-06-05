@@ -1,8 +1,14 @@
-use std::collections::HashMap;
 use invoker::{InvokerContext, InvokerExecutable};
+use std::collections::HashMap;
 use std::path::Path;
 
 mod server;
+
+#[derive(thiserror::Error, Debug)]
+pub enum InvokerGrpcError {
+    #[error("Grpc server start error, cause by: {0}")]
+    GrpcServerStartError(#[from] tonic::transport::Error),
+}
 
 pub type RuntimeData = ();
 
@@ -12,14 +18,15 @@ pub struct GrpcInvoker {
     /// Rpc bind address.
     addr: String,
     /// Function service id map to component id.
-    components_router: HashMap<String, String>
+    components_router: HashMap<String, String>,
 }
 
+#[async_trait::async_trait]
 impl InvokerExecutable for GrpcInvoker {
     type RuntimeData = RuntimeData;
 
     async fn run(&self) {
-        server::start(self.server_addr.as_str()).await;
+        let _ = server::start(self.addr.as_str()).await;
     }
 
     // call context, first, fetch component from registry, secondly, instantiate_pre
@@ -31,5 +38,3 @@ impl InvokerExecutable for GrpcInvoker {
         todo!()
     }
 }
-
-
