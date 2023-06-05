@@ -6,6 +6,7 @@ use runtime::Store;
 // There's tcp, mqtt, rpc and http(maybe) invokers. For upcoming, stream compute invoker.
 mod execute;
 
+/// Support common method for InvokerExecutable
 pub struct InvokerContext<Executable> {}
 
 impl<Executable: InvokerExecutable> InvokerContext<Executable> {

@@ -5,4 +5,6 @@ pub trait InvokerExecutable {
     async fn run(&self);
 
     async fn instantiate_pre();
+
+    async fn execute(&self);
 }
