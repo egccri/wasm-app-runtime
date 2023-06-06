@@ -2,7 +2,9 @@
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CallRequest {
     #[prost(int32, tag = "1")]
-    pub action: i32,
+    pub service_id: i32,
+    #[prost(string, tag = "2")]
+    pub payload: ::prost::alloc::string::String,
 }
 /// Generated client implementations.
 pub mod caller_client {

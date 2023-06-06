@@ -22,7 +22,6 @@ pub struct CallerService;
 
 #[tonic::async_trait]
 impl Caller for CallerService {
-
     async fn call(&self, request: Request<CallRequest>) -> Result<Response<()>, Status> {
         todo!()
     }

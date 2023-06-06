@@ -8,5 +8,6 @@ service Caller {
 }
 
 message CallRequest {
-  int32 action = 1;
+  int32 serviceId = 1;
+  string payload = 2;
 }
