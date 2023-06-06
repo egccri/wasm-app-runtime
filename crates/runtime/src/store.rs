@@ -13,6 +13,12 @@ pub struct Store<T> {
     inner: wasmtime::Store<Context<T>>,
 }
 
+impl <T> Store<T> {
+    pub fn inner(self) -> wasmtime::Store<Context<T>> {
+        self.inner
+    }
+}
+
 pub struct Context<T> {
     inner: T,
     wasi: Wasi,

@@ -1,6 +1,9 @@
 use invoker::{InvokerContext, InvokerExecutable};
 use std::collections::HashMap;
 use std::path::Path;
+use runtime::component::__internal::anyhow::anyhow;
+use runtime::component::Instance;
+use runtime::Store;
 
 mod server;
 
@@ -8,6 +11,9 @@ mod server;
 pub enum InvokerGrpcError {
     #[error("Grpc server start error, cause by: {0}")]
     GrpcServerStartError(#[from] tonic::transport::Error),
+
+    #[error("Invoker fetch instance error.")]
+    InvokerFetchInstanceError()
 }
 
 pub type RuntimeData = ();
@@ -36,5 +42,11 @@ impl InvokerExecutable for GrpcInvoker {
 
     async fn execute(&self) {
         todo!()
+    }
+}
+
+impl GrpcInvoker {
+    fn execute_impl(mut store: Store<RuntimeData>, instance: Instance) -> Result<(), InvokerGrpcError> {
+        Ok(())
     }
 }

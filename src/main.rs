@@ -1,6 +1,6 @@
 use runtime::component::Component;
 use runtime::preview2::{wasi, Table, WasiCtx, WasiView};
-use runtime::{component, Config, Engine, Store, Wasi};
+use runtime::{component, Config, Engine, Wasi, WasmtimeStore};
 use std::error::Error;
 use wasi_messaging::exports::wasi::messaging::handler::Event;
 use wasi_messaging::{Messaging, WasmtimeMessaging};
@@ -22,7 +22,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         wasi_messaging,
     };
 
-    let mut store = Store::new(&engine, ctx);
+    let mut store = WasmtimeStore::new(&engine, ctx);
 
     // link wasi standard and wasi-messaging host functions.
     // what different between linker and component linker?

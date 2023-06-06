@@ -20,6 +20,7 @@ members = [
     "crates/registry",
     "crates/wasi-messaging",
     "crates/invoker-grpc",
+    "crates/host-bindgen",
     "sdk/rust",
     "guest"
 ]
