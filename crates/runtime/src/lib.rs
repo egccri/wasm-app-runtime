@@ -4,13 +4,13 @@ mod registry;
 mod store;
 
 // Re-export for the main demo, remove this later.
+pub use wasmtime::Store as WasmtimeStore;
 pub use wasmtime::*;
 pub use wasmtime_wasi::*;
-pub use wasmtime::Store as WasmtimeStore;
 
 // Export here.
 pub use crate::host::{HostComponent, HostData};
-pub use crate::store::{Store, Context, Wasi};
+pub use crate::store::{Context, Store, Wasi};
 
 #[derive(thiserror::Error, Debug, PartialEq)]
 pub enum RuntimeError {

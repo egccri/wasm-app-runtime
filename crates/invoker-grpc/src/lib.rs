@@ -1,9 +1,9 @@
 use invoker::{InvokerContext, InvokerExecutable};
+use runtime::component::Instance;
+use runtime::component::__internal::anyhow::anyhow;
+use runtime::Store;
 use std::collections::HashMap;
 use std::path::Path;
-use runtime::component::__internal::anyhow::anyhow;
-use runtime::component::Instance;
-use runtime::Store;
 
 mod server;
 
@@ -13,7 +13,7 @@ pub enum InvokerGrpcError {
     GrpcServerStartError(#[from] tonic::transport::Error),
 
     #[error("Invoker fetch instance error.")]
-    InvokerFetchInstanceError()
+    InvokerFetchInstanceError,
 }
 
 pub type RuntimeData = ();
@@ -46,7 +46,19 @@ impl InvokerExecutable for GrpcInvoker {
 }
 
 impl GrpcInvoker {
-    fn execute_impl(mut store: Store<RuntimeData>, instance: Instance) -> Result<(), InvokerGrpcError> {
-        Ok(())
+    async fn execute_impl(
+        store: Store<RuntimeData>,
+        instance: Instance,
+    ) -> Result<String, InvokerGrpcError> {
+        let mut store = store.inner();
+        let func = instance
+            .exports(&mut store)
+            .instance("grpc")
+            .ok_or_else(|| InvokerGrpcError::InvokerFetchInstanceError)?
+            .typed_func::<(&str,), (Result<String, host_bindgen::exports::gprc::Error>,)>("call").unwrap();
+        match func.call_async(store, ("egccri",)).await.unwrap() {
+            (Ok(result),) => Ok(result),
+            _ => Err(InvokerGrpcError::InvokerFetchInstanceError),
+        }
     }
 }
