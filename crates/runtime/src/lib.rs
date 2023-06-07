@@ -1,3 +1,9 @@
+//! This is `Embedder` core.
+//!
+//! A WebAssembly implementation will typically be embedded into a host environment. This environment
+//! defines how loading of modules is initiated, how imports are provided (including host-side definitions),
+//! and how exports can be accessed. However, the details of any particular embedding are beyond the scope of this specification,
+//! and will instead be provided by complementary, environment-specific API definitions.
 mod app;
 mod host;
 mod registry;
