@@ -22,7 +22,8 @@ members = [
     "crates/invoker-grpc",
     "crates/host-bindgen",
     "sdk/rust",
-    "guest"
+    "guest/messaging",
+    "guest/grpc-service",
 ]
 
 [dependencies]

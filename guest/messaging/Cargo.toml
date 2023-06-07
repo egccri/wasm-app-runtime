@@ -1,14 +1,11 @@
 [package]
-name = "egccri-rust"
+name = "messaging"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["cdylib"]
 
 [dependencies]
-wit-bindgen = { workspace = true }
-
-[features]
-default = ["messaging", "invoker-grpc"]
-messaging = []
-invoker-grpc = []
+egccri-rust = { path = "../../sdk/rust", default-features = false, features = ["messaging"] }

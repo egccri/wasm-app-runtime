@@ -1,7 +1,7 @@
-use egccri_rust::exports::wasi::messaging::handler;
-use egccri_rust::exports::wasi::messaging::handler::{Error, Event};
-use egccri_rust::wasi::messaging::messaging_types::open_broker;
-use egccri_rust::wasi::messaging::producer::{publish, Channel};
+use egccri_rust::messaging::exports::wasi::messaging::handler;
+use egccri_rust::messaging::exports::wasi::messaging::handler::{Error, Event};
+use egccri_rust::messaging::wasi::messaging::messaging_types::open_broker;
+use egccri_rust::messaging::wasi::messaging::producer::{publish, Channel};
 
 struct EgccriMessaging;
 
@@ -34,4 +34,4 @@ impl handler::Handler for EgccriMessaging {
     }
 }
 
-export_messaging!(EgccriMessaging);
+egccri_rust::messaging::export_messaging!(EgccriMessaging);

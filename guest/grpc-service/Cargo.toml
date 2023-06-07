@@ -1,11 +1,12 @@
 [package]
-name = "guest"
+name = "grpc-service"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-egccri-rust = { path = "../sdk/rust" }
+egccri-rust = { path = "../../sdk/rust", default-features = false, features = ["invoker-grpc"] }
