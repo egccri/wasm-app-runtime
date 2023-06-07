@@ -1,6 +1,6 @@
 pub use crate::execute::InvokerExecutable;
-use runtime::component::Component;
-use runtime::{RuntimeEngine, Store};
+use runtime::component::{Component, InstancePre};
+use runtime::{Context, RuntimeEngine, Store};
 
 // Invoker common utils, invoker is a trigger that watch egccri to instantiate and call it's export funcs.
 // There's tcp, mqtt, rpc and http(maybe) invokers. For upcoming, stream compute invoker.
@@ -9,14 +9,22 @@ mod execute;
 /// Support common method for InvokerExecutable
 pub struct InvokerContext<Executable: InvokerExecutable> {
     engine: RuntimeEngine<Executable::RuntimeData>,
+    // todo linker here
 }
 
 impl<Executable: InvokerExecutable> InvokerContext<Executable> {
-    pub fn instantiate_pre() -> (Component, Store<Executable::RuntimeData>) {
+    pub fn instantiate_pre(
+        &self,
+        component_id: &str,
+    ) -> (
+        InstancePre<Context<Executable::RuntimeData>>,
+        Store<Executable::RuntimeData>,
+    ) {
+        let component = self.fetch_component(component_id);
         todo!()
     }
 
-    pub fn fetch_component() -> Component {
+    pub fn fetch_component(&self, component_id: &str) -> Component {
         todo!()
     }
 }

@@ -36,13 +36,13 @@ clap = { version = "4", features = ["derive"] }
 # wait wasmtime version 10 publish.
 wasmtime = { git = "https://github.com/bytecodealliance/wasmtime", rev = "f3a7f631836bca3297cc9fd26d8eb7176519d306", features = ["component-model"] }
 wasmtime-wasi = { git = "https://github.com/bytecodealliance/wasmtime", rev = "f3a7f631836bca3297cc9fd26d8eb7176519d306", features = ["tokio"] }
-tokio = { version = "1.21.2", features = ["full"] }
-wit-bindgen = "0.7.0"
-warg-cli = { git = "https://github.com/curtiseng/registry.git", branch = "update-wasmtime-version" }
 #wasmtime = { version = "6.0.0", features = ["component-model"] }
 #wasi-common = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
 #wasi-cap-std-sync = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
 #host = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
+wit-bindgen = "0.7.0"
+warg-cli = { git = "https://github.com/curtiseng/registry.git", branch = "update-wasmtime-version" }
+tokio = { version = "1.21.2", features = ["full"] }
 tonic = "0.9.2"
 prost = "0.11.9"
 tonic-build = "0.9.2"
