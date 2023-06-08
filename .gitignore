@@ -20,4 +20,4 @@ Cargo.lock
 
 .idea
 
-./tools
+/tools

@@ -1,4 +1,6 @@
 use egccri_rust::invoker_grpc::exports;
+#[cfg(target_arch = "wasm32")]
+use egccri_rust::invoker_grpc::__link_section;
 
 struct GrpcService;
 
