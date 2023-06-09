@@ -7,3 +7,7 @@ edition = "2021"
 
 [dependencies]
 warg-cli = { workspace = true }
+warg-client = { workspace = true }
+warg-crypto = { workspace = true }
+warg-protocol = { workspace = true }
+dirs = "5.0.1"

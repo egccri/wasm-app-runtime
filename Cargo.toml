@@ -43,6 +43,9 @@ wasmtime-wasi = { git = "https://github.com/bytecodealliance/wasmtime", rev = "f
 #host = { git = "https://github.com/bytecodealliance/preview2-prototyping", rev = "75f8fc6151bc9e8cb92f2547f81a3b7056889735" }
 wit-bindgen = "0.7.0"
 warg-cli = { git = "https://github.com/curtiseng/registry.git", branch = "update-wasmtime-version" }
+warg-client = { git = "https://github.com/curtiseng/registry.git", branch = "update-wasmtime-version" }
+warg-crypto = { git = "https://github.com/curtiseng/registry.git", branch = "update-wasmtime-version" }
+warg-protocol = { git = "https://github.com/curtiseng/registry.git", branch = "update-wasmtime-version" }
 tokio = { version = "1.21.2", features = ["full"] }
 tonic = "0.9.2"
 prost = "0.11.9"
