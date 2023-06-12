@@ -6,8 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-warg-cli = { workspace = true }
 warg-client = { workspace = true }
 warg-crypto = { workspace = true }
 warg-protocol = { workspace = true }
 dirs = "5.0.1"
+thiserror = { workspace = true }

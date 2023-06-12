@@ -1,0 +1,9 @@
+# registry
+[registry]
+url = "127.0.0.1:8090"
+app-install-path = "installs"
+
+[invokers.grpc]
+bind_address = "0.0.0.0:9999"
+
+
