@@ -1,15 +1,15 @@
-use crate::{RegistryError, CELL};
+use crate::RegistryError;
 use std::path::PathBuf;
 use warg_client::{ClientError, Config, FileSystemClient, StorageLockResult};
 use warg_protocol::VersionReq;
 
 /// Create when application started, hold by `OnceCell`
 pub struct WargWrapper {
-    config: WargClientConfig,
+    config: WargConfig,
 }
 
 /// Config from config file or command line.
-pub struct WargClientConfig {
+pub struct WargConfig {
     /// registry url, default from egccri app store.
     pub registry: Option<String>,
 
@@ -21,8 +21,8 @@ pub struct WargClientConfig {
 }
 
 impl WargWrapper {
-    pub fn get(config: WargClientConfig) -> &'static WargWrapper {
-        CELL.get_or_init(|| WargWrapper { config })
+    pub fn new(config: WargConfig) -> Self {
+        WargWrapper { config }
     }
 
     pub fn create_client(&self) -> Result<FileSystemClient, ClientError> {
@@ -40,8 +40,10 @@ impl WargWrapper {
         }
     }
 
+    // FIXME: Remove this config from file, add from `WargClientConfig`
     pub fn map_client_config(&self) -> Result<Config, RegistryError> {
-        todo!("implement custom client config init method with trait.")
+        Config::from_file("../../../tools/local/config.json")
+            .map_err(|err| RegistryError::WargWrapperError(err.to_string()))
     }
 
     pub async fn download(
@@ -54,7 +56,7 @@ impl WargWrapper {
         let res = client
             .download(app_name, version.as_ref().unwrap_or(&VersionReq::STAR))
             .await?
-            .ok_or_else(|| RegistryError::WargWrapperError("".to_string()))?;
+            .ok_or_else(|| RegistryError::WargWrapperError("download failed".to_string()))?;
         Ok(res.path)
     }
 }

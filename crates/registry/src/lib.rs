@@ -6,7 +6,7 @@ pub use app::{App, AppStore};
 use std::sync::OnceLock;
 use warg_client::ClientError;
 
-static CELL: OnceLock<WargWrapper> = OnceLock::new();
+static APP_STORE: OnceLock<AppStore> = OnceLock::new();
 
 #[derive(thiserror::Error, Debug)]
 pub enum RegistryError {
