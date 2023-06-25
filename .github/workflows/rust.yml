@@ -16,6 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: true
+        fetch-depth: 0
     - name: Install Protobuf Compiler
       uses: arduino/setup-protoc@v1
     - name: Build
