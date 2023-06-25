@@ -1,7 +1,0 @@
-package wasi:messaging
-
-world messaging {
-	import producer
-	import consumer
-	export handler
-}
