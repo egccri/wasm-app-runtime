@@ -2,7 +2,7 @@ use runtime::component::Component;
 use runtime::preview2::{wasi, Table, WasiCtx, WasiView};
 use runtime::{component, Config, Engine, Wasi, WasmtimeStore};
 use std::error::Error;
-use wasi_messaging::exports::wasi::messaging::handler::Event;
+use wasi_messaging::wasi::messaging::messaging_types;
 use wasi_messaging::{Messaging, WasmtimeMessaging};
 
 #[tokio::main]
@@ -38,23 +38,16 @@ async fn main() -> Result<(), Box<dyn Error>> {
     // instantiate
     let (messaging, _) = Messaging::instantiate_pre(&mut store, &instance_pre).await?;
 
-    // call guest component from host
-    let new_event = Event {
-        data: Some(Vec::from("fizz".as_bytes())),
-        id: "123".to_string(),
-        source: "rust".to_string(),
-        specversion: "1.0".to_string(),
-        ty: "com.my-messaing.rust.fizzbuzz".to_string(),
-        datacontenttype: None,
-        dataschema: None,
-        subject: None,
-        time: None,
-        extensions: None,
+    // pretend to have received a message
+    let msg = messaging_types::Message {
+        data: vec![1, 2, 3],
+        format: messaging_types::FormatSpec::Http,
+        metadata: None,
     };
 
     let res = messaging
-        .wasi_messaging_handler()
-        .call_on_receive(&mut store, &new_event)
+        .wasi_messaging_messaging_guest()
+        .call_handler(&mut store, &[&msg])
         .await?;
 
     println!(">>> called on_receive: {:#?}", res);

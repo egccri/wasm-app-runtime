@@ -1,36 +1,17 @@
-use egccri_rust::messaging::exports::wasi::messaging::handler;
-use egccri_rust::messaging::exports::wasi::messaging::handler::{Error, Event};
-use egccri_rust::messaging::wasi::messaging::messaging_types::open_broker;
-use egccri_rust::messaging::wasi::messaging::producer::{publish, Channel};
+use egccri_rust::messaging::exports;
+use egccri_rust::messaging::exports::wasi::messaging::messaging_guest::{
+    Error, GuestConfiguration, Message, MessagingGuest,
+};
 
 struct EgccriMessaging;
 
-impl handler::Handler for EgccriMessaging {
-    fn on_receive(e: Event) -> Result<(), Error> {
-        println!(">>> Received: {:#?}", e);
+impl MessagingGuest for EgccriMessaging {
+    fn configure() -> Result<GuestConfiguration, Error> {
+        todo!()
+    }
 
-        let data = e.data.unwrap();
-        let data_s = String::from_utf8(data).unwrap();
-
-        let broker = open_broker("test-broker")?;
-
-        let new_event = EventParam {
-            data: Some(msg.as_bytes()),
-            id: "123",
-            source: "rust",
-            specversion: "1.0",
-            ty: "com.my-messaing.rust.fizzbuzz",
-            datacontenttype: None,
-            dataschema: None,
-            subject: None,
-            time: None,
-            extensions: None,
-        };
-
-        println!(">>> Publishing: {:#?}", new_event);
-        publish(b, Channel::Topic("rust"), new_event)?;
-
-        Ok(())
+    fn handler(ms: Vec<Message>) -> Result<(), Error> {
+        todo!()
     }
 }
 

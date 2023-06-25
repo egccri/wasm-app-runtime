@@ -1,3 +1,4 @@
+use crate::wasi::messaging::consumer::{Channel, Client, Error, GuestConfiguration, Message};
 use crate::wasi::messaging::{consumer, messaging_types, producer};
 use wasmtime::component::Linker;
 
@@ -22,60 +23,69 @@ impl WasmtimeMessaging {
 
 #[async_trait::async_trait]
 impl consumer::Host for WasmtimeMessaging {
-    async fn subscribe(
+    async fn subscribe_try_receive(
         &mut self,
-        b: consumer::Broker,
-        c: consumer::Channel,
-    ) -> wasmtime::Result<Result<consumer::SubscriptionToken, consumer::Error>> {
-        println!(">>> called subscribe");
-        Ok(Ok("".to_string()))
+        c: Client,
+        ch: Channel,
+        t_milliseconds: u32,
+    ) -> wasmtime::Result<Result<Option<Vec<Message>>, Error>> {
+        todo!()
     }
 
-    async fn unsubscribe(
+    async fn subscribe_receive(
         &mut self,
-        b: consumer::Broker,
-        st: consumer::SubscriptionToken,
-    ) -> wasmtime::Result<Result<(), consumer::Error>> {
-        println!(">>> called unsubscribe");
-        Ok(Ok(()))
+        c: Client,
+        ch: Channel,
+    ) -> wasmtime::Result<Result<Vec<Message>, Error>> {
+        todo!()
+    }
+
+    async fn update_guest_configuration(
+        &mut self,
+        gc: GuestConfiguration,
+    ) -> wasmtime::Result<Result<(), Error>> {
+        todo!()
+    }
+
+    async fn complete_message(&mut self, m: Message) -> wasmtime::Result<Result<(), Error>> {
+        todo!()
+    }
+
+    async fn abandon_message(&mut self, m: Message) -> wasmtime::Result<Result<(), Error>> {
+        todo!()
     }
 }
 
 #[async_trait::async_trait]
 impl producer::Host for WasmtimeMessaging {
-    async fn publish(
+    async fn send(
         &mut self,
-        b: producer::Broker,
-        c: producer::Channel,
-        e: producer::Event,
+        c: producer::Client,
+        ch: producer::Channel,
+        m: Vec<producer::Message>,
     ) -> wasmtime::Result<Result<(), producer::Error>> {
-        println!(">>> called publish");
-        Ok(Ok(()))
+        todo!()
     }
 }
 
 #[async_trait::async_trait]
 impl messaging_types::Host for WasmtimeMessaging {
-    async fn drop_broker(&mut self, b: messaging_types::Broker) -> wasmtime::Result<()> {
-        println!(">>> called drop_broker");
-        Ok(())
+    async fn disconnect(&mut self, c: messaging_types::Client) -> wasmtime::Result<()> {
+        todo!()
     }
 
-    async fn open_broker(
+    async fn connect(
         &mut self,
         name: String,
-    ) -> wasmtime::Result<Result<messaging_types::Broker, messaging_types::Error>> {
-        println!(">>> called open_broker");
-        Ok(Ok(0))
+    ) -> wasmtime::Result<Result<messaging_types::Client, messaging_types::Error>> {
+        todo!()
     }
 
     async fn drop_error(&mut self, e: messaging_types::Error) -> wasmtime::Result<()> {
-        println!(">>> called drop_error");
-        Ok(())
+        todo!()
     }
 
-    async fn trace_error(&mut self, e: messaging_types::Error) -> wasmtime::Result<String> {
-        println!(">>> called trace");
-        Ok("".to_string())
+    async fn trace(&mut self, e: messaging_types::Error) -> wasmtime::Result<String> {
+        todo!()
     }
 }
