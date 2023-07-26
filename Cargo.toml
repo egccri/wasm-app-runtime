@@ -21,17 +21,25 @@ members = [
     "crates/wasi-messaging",
     "crates/invoker-grpc",
     "crates/host-bindgen",
+    "crates/kv-storage",
+    "library/micro-async-module",
+    "library/pool",
     "sdk/rust",
     "guest/messaging",
     "guest/grpc-service",
 ]
 
 [dependencies]
+micro-async-module = { path = "library/micro-async-module" }
 runtime = { path = "crates/runtime" }
 invoker-grpc = { path = "crates/invoker-grpc" }
 wasi-messaging = { path = "crates/wasi-messaging" }
+kv-storage = { path = "crates/kv-storage" }
 tokio = { workspace = true }
 clap = { version = "4", features = ["derive"] }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
 
 [workspace.dependencies]
 # wait wasmtime version 10 publish.

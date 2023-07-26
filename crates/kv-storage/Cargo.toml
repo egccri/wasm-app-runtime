@@ -1,0 +1,12 @@
+[package]
+name = "kv-storage"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+micro-async-module = { path = "../../library/micro-async-module" }
+sled = "0.34.7"
+tracing = { workspace = true }
+thiserror = { workspace = true }
