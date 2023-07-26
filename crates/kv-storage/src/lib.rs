@@ -1,5 +1,6 @@
 use micro_async_module::{run_async_block_on, AsyncRuntime, Module};
 use sled::Error;
+use std::str::Utf8Error;
 use std::sync::{Arc, OnceLock};
 use thiserror::Error;
 
@@ -36,6 +37,33 @@ async fn initial_table() {
 
 #[derive(Error, Debug)]
 pub enum StorageError {
-    #[error("storage sled error from {0:?}")]
+    #[error("Storage sled error from {0:?}")]
     SledError(#[from] Error),
+
+    #[error("Can not find db")]
+    GetDBNoneError,
+
+    #[error(transparent)]
+    Utf8Error(#[from] Utf8Error),
+
+    #[error("Not found key: {0}")]
+    KeyNotFoundError(String),
+}
+
+pub fn set(key: String, value: String) -> Result<(), StorageError> {
+    let db = POLL.get().ok_or_else(|| StorageError::GetDBNoneError)?;
+    db.insert(key, value.as_str())
+        .map_err(|err| StorageError::SledError(err))?;
+    Ok(())
+}
+
+pub fn get(key: String) -> Result<String, StorageError> {
+    let db = POLL.get().ok_or_else(|| StorageError::GetDBNoneError)?;
+    let value = db.get(&key).map_err(|err| StorageError::SledError(err))?;
+    if let Some(value) = value {
+        let s = std::str::from_utf8(&value)?;
+        Ok(s.to_string())
+    } else {
+        Err(StorageError::KeyNotFoundError(key))
+    }
 }
