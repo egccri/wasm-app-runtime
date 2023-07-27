@@ -14,13 +14,25 @@ pub struct InstallCommand {
 
 impl InstallCommand {
     pub fn execute(&self, channel: Channel) -> anyhow::Result<()> {
-        // check engine init complete with wasi and other host component features
+        tracing::info!("Install app: {}-{}", &self.app_name, &self.version);
+        InstallClient::install_app(self.app_name.clone(), self.version.clone(), channel);
+        Ok(())
+    }
+}
 
-        // collect runtime data, include store data, component data.
+// Add some auth
+pub struct InstallClient;
 
-        // build component
-
-        // instance with hooks
+impl InstallClient {
+    pub async fn install_app(
+        app_name: String,
+        version: String,
+        channel: Channel,
+    ) -> anyhow::Result<()> {
+        let mut client =
+            runtime_api::runtime::runtime_app::app_service_client::AppServiceClient::new(channel);
+        let request = runtime_api::runtime::runtime_app::AppInstallRequest { app_name, version };
+        client.install(tonic::Request::new(request));
         Ok(())
     }
 }

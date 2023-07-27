@@ -27,7 +27,9 @@ fn main() -> anyhow::Result<()> {
     EgccriServer::try_parse()
         .unwrap_or_else(|e| match e.kind() {
             ErrorKind::InvalidSubcommand | ErrorKind::UnknownArgument => {
-                EgccriServer::Run(RunCommand {})
+                EgccriServer::Run(RunCommand {
+                    server_addr: "127.0.0.1:9999".to_string(),
+                })
             }
             _ => e.exit(),
         })

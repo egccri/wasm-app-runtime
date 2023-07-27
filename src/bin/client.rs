@@ -3,6 +3,7 @@ use clap::error::ErrorKind;
 use clap::Parser;
 use egccri_runtime::commands::apply::ApplyCommand;
 use egccri_runtime::commands::install::InstallCommand;
+use std::fmt::format;
 use std::path::PathBuf;
 use tonic::codegen::Body;
 use tonic::transport::Channel;
@@ -54,11 +55,13 @@ pub struct EgccriClient {
 
 impl EgccriClient {
     pub async fn connect(server_addr: String) -> anyhow::Result<Channel> {
+        tracing::info!("Connect to runtime server: {}", &server_addr);
+        let server_addr = format!("http://{}", server_addr);
         Channel::from_shared(server_addr)
             .map_err(|err| anyhow!("Connect server error, cause by {err}"))?
             .connect()
             .await
-            .map_err(|err| anyhow!("Connect server error, cause by {err}"))
+            .map_err(|err| anyhow!("Connect server error, cause by {:?}", err))
     }
 }
 

@@ -19,6 +19,10 @@ How to add a pub/sub support with rust and wasmtime?
 #### Client
 
 ```shell
+# run server
+egccri run 0.0.0.0:9999
+
+# install app use client
 egccri-client -s 127.0.0.1:9999 install grpc-service 0.1.0
 ```
 

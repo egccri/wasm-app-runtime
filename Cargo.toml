@@ -23,6 +23,7 @@ members = [
     "crates/host-bindgen",
     "crates/kv-storage",
     "crates/runtime-api",
+    "crates/runtime-server",
     "library/micro-async-module",
     "library/pool",
     "sdk/rust",
@@ -37,6 +38,7 @@ invoker-grpc = { path = "crates/invoker-grpc" }
 wasi-messaging = { path = "crates/wasi-messaging" }
 kv-storage = { path = "crates/kv-storage" }
 runtime-api = { path = "crates/runtime-api" }
+runtime-server = { path = "crates/runtime-server" }
 tokio = { workspace = true }
 clap = { version = "4", features = ["derive"] }
 anyhow = { workspace = true }

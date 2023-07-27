@@ -23,3 +23,5 @@ Cargo.lock
 /tools
 
 .DS_Store
+
+./my_db
