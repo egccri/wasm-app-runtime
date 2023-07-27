@@ -16,6 +16,12 @@ How to add a pub/sub support with rust and wasmtime?
 + write a guest crate to use `pub/sub` sdk
 + support run wasm with cmd
 
+#### Client
+
+```shell
+egccri-client -s 127.0.0.1:9999 install grpc-service 0.1.0
+```
+
 #### Next
 
 Publish and run guest from registry.

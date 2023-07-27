@@ -36,11 +36,14 @@ runtime = { path = "crates/runtime" }
 invoker-grpc = { path = "crates/invoker-grpc" }
 wasi-messaging = { path = "crates/wasi-messaging" }
 kv-storage = { path = "crates/kv-storage" }
+runtime-api = { path = "crates/runtime-api" }
 tokio = { workspace = true }
 clap = { version = "4", features = ["derive"] }
 anyhow = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
+tonic = { workspace = true }
+prost = { workspace = true }
 
 [workspace.dependencies]
 # wait wasmtime version 10 publish.
