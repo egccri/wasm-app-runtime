@@ -24,4 +24,4 @@ Cargo.lock
 
 .DS_Store
 
-./my_db
+/my_db
