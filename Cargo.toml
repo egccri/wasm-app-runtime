@@ -22,6 +22,7 @@ members = [
     "crates/invoker-grpc",
     "crates/host-bindgen",
     "crates/kv-storage",
+    "crates/runtime-api",
     "library/micro-async-module",
     "library/pool",
     "sdk/rust",

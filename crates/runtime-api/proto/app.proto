@@ -1,0 +1,18 @@
+// 安装app
+syntax = "proto3";
+
+package runtime_app;
+
+
+service app_service {
+  rpc install(AppInstallRequest) returns (AppInstallReply);
+}
+
+message AppInstallRequest {
+  string app_name = 1;
+  string version = 2;
+}
+
+message AppInstallReply {
+
+}
