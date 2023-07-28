@@ -1,6 +1,7 @@
 use crate::warg::{WargConfig, WargWrapper};
 use crate::RegistryError::WargWrapperError;
 use crate::{RegistryError, APP_STORE};
+use serde::Deserialize;
 use std::collections::HashMap;
 use std::path::PathBuf;
 
@@ -20,12 +21,14 @@ pub struct AppStore {
     warg_wrapper: WargWrapper,
 }
 
+#[derive(Deserialize, Debug, Clone)]
 pub struct AppStoreConfig {
     base_idr: PathBuf,
     warg_config: WargConfig,
     auth: AppStoreAuth,
 }
 
+#[derive(Deserialize, Debug, Clone)]
 pub struct AppStoreAuth {}
 
 impl<'a> AppStore {

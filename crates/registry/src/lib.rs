@@ -2,7 +2,7 @@ mod app;
 mod warg;
 
 use crate::warg::WargWrapper;
-pub use app::{App, AppStore};
+pub use app::{App, AppStore, AppStoreConfig};
 use std::sync::OnceLock;
 use warg_client::ClientError;
 

@@ -11,3 +11,4 @@ warg-crypto = { workspace = true }
 warg-protocol = { workspace = true }
 dirs = "5.0.1"
 thiserror = { workspace = true }
+serde = { workspace = true }

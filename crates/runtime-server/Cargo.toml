@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 micro-async-module = { path = "../../library/micro-async-module" }
 runtime-api = { path = "../runtime-api" }
+registry = { path = "../registry" }
 tonic = { workspace = true }
 prost = { workspace = true }
 thiserror = { workspace = true }

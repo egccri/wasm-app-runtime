@@ -1,4 +1,5 @@
 use crate::RegistryError;
+use serde::Deserialize;
 use std::path::PathBuf;
 use warg_client::{ClientError, Config, FileSystemClient, StorageLockResult};
 use warg_protocol::VersionReq;
@@ -9,6 +10,7 @@ pub struct WargWrapper {
 }
 
 /// Config from config file or command line.
+#[derive(Deserialize, Debug, Clone)]
 pub struct WargConfig {
     /// registry url, default from egccri app store.
     pub registry: Option<String>,
@@ -42,7 +44,7 @@ impl WargWrapper {
 
     // FIXME: Remove this config from file, add from `WargClientConfig`
     pub fn map_client_config(&self) -> Result<Config, RegistryError> {
-        Config::from_file("../../../tools/local/config.json")
+        Config::from_file("../../../config/config.json")
             .map_err(|err| RegistryError::WargWrapperError(err.to_string()))
     }
 

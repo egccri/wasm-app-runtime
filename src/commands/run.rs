@@ -1,3 +1,4 @@
+use crate::settings::ServerSetting;
 use kv_storage::StorageSled;
 use micro_async_module::App;
 use runtime_server::RuntimeServer;
@@ -10,7 +11,7 @@ pub struct RunCommand {
 }
 
 impl RunCommand {
-    pub fn execute(self) -> anyhow::Result<()> {
+    pub fn execute(self, setting: ServerSetting) -> anyhow::Result<()> {
         let app = App::new("egccri".to_string(), 4, 100);
         let runtime_server = RuntimeServer::new(self.server_addr);
         app.add_module(StorageSled).add_module(runtime_server).run();

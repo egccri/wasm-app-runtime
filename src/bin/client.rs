@@ -18,7 +18,7 @@ struct Egccri {
 
     /// Sub command
     #[clap(subcommand)]
-    command: Command,
+    command: ClientCommand,
 
     /// Server config file path, the default is "./config.toml"
     #[arg(
@@ -30,7 +30,7 @@ struct Egccri {
 }
 
 #[derive(clap::Subcommand, Debug)]
-enum Command {
+enum ClientCommand {
     /// apply config
     Apply(ApplyCommand),
 
@@ -43,8 +43,8 @@ impl Egccri {
         let server_addr = self.server_addr.clone();
         let channel = EgccriClient::connect(server_addr).await?;
         match self.command {
-            Command::Apply(apply_command) => apply_command.execute(channel.clone()),
-            Command::Install(install_command) => install_command.execute(channel.clone()),
+            ClientCommand::Apply(apply_command) => apply_command.execute(channel.clone()),
+            ClientCommand::Install(install_command) => install_command.execute(channel.clone()),
         }
     }
 }
