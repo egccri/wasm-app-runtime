@@ -3,6 +3,7 @@ use clap::error::ErrorKind;
 use clap::Parser;
 use egccri_runtime::commands::apply::ApplyCommand;
 use egccri_runtime::commands::install::InstallCommand;
+use egccri_runtime::commands::registry::RegistryCommand;
 use std::fmt::format;
 use std::path::PathBuf;
 use tonic::codegen::Body;
@@ -36,6 +37,9 @@ enum ClientCommand {
 
     /// install app
     Install(InstallCommand),
+
+    /// registry
+    Registry(RegistryCommand),
 }
 
 impl Egccri {
@@ -45,6 +49,7 @@ impl Egccri {
         match self.command {
             ClientCommand::Apply(apply_command) => apply_command.execute(channel.clone()),
             ClientCommand::Install(install_command) => install_command.execute(channel.clone()),
+            ClientCommand::Registry(_) => Ok(()),
         }
     }
 }
