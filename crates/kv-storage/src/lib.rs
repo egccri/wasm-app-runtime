@@ -3,6 +3,27 @@ use sled::Error;
 use std::str::Utf8Error;
 use std::sync::{Arc, OnceLock};
 use thiserror::Error;
+use wasmtime::component::__internal::async_trait;
+
+wasmtime::component::bindgen!({path: "../../wit/kv/default", async: true});
+
+#[async_trait]
+impl crate::key_vlaue::Host for WasmtimeKvSled {
+    async fn get(&mut self, key: String) -> wasmtime::Result<Result<String, key_vlaue::Error>> {
+        todo!()
+    }
+
+    async fn set(
+        &mut self,
+        key: String,
+        value: String,
+    ) -> wasmtime::Result<Result<(), key_vlaue::Error>> {
+        todo!()
+    }
+}
+
+#[derive(Debug, Clone)]
+pub struct WasmtimeKvSled;
 
 static POLL: OnceLock<Arc<sled::Db>> = OnceLock::new();
 

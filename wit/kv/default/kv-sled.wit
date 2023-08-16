@@ -1,0 +1,11 @@
+package egccri:kv
+
+world kv-sled {
+  import key-vlaue: interface {
+    type error = u32
+
+    get: func(key: string) -> result<string, error>
+
+    set: func(key: string, value: string) -> result<_, error>
+  }
+}

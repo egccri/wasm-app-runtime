@@ -20,8 +20,10 @@ impl<T> Store<T> {
 }
 
 pub struct Context<T> {
+    // invoker runtime data
     inner: T,
     wasi: Wasi,
+    // host component data with position
     host_data: HostData,
     limit: StoreLimits,
 }

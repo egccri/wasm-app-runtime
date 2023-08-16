@@ -1,0 +1,9 @@
+package egccri:invoker
+
+world invoker-grpc {
+  export gprc: interface {
+    type error = u32
+
+    call: func(payload: string) -> result<string, error>
+  }
+}

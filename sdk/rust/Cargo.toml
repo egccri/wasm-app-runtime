@@ -9,6 +9,7 @@ edition = "2021"
 wit-bindgen = { workspace = true }
 
 [features]
-default = ["messaging", "invoker-grpc"]
+default = ["messaging", "invoker-grpc", "kv-sled"]
 messaging = []
 invoker-grpc = []
+kv-sled = []
