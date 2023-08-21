@@ -1,22 +1,15 @@
 # egccri-runtime
-An experimental runtime.
+An experimental wasm app runtime.
 
 Wasi include in wasm-component(contains interface type), define in wit file, then use linker link to the 
-wasmtime module.
+wasmtime component.
 
-How to add a pub/sub support with rust and wasmtime?
+#### Features
 
-+ consider use wasi support io function
-+ use a wit file to describe `pub/sub` interface
-+ design a `pub/sub` protocol base tcp
-+ use `wit-bindgen` generate host/guest code 
-+ impl `pub/sub` base host generate code for wasmtime
-+ link `pub/sub` component to wasmtime
-+ give a sdk use `wit-bindgen`(extend 'C')
-+ write a guest crate to use `pub/sub` sdk
-+ support run wasm with cmd
++ async
++ multi invokers
 
-#### Client
+#### How to Use
 
 ```shell
 # run server
@@ -26,7 +19,7 @@ egccri run 0.0.0.0:9999
 egccri-client -s 127.0.0.1:9999 install grpc-service 0.1.0
 ```
 
-#### Next
+#### Other
 
 Publish and run guest from registry.
 
@@ -38,6 +31,19 @@ Use cargo component impl guest.
 ```shell
 cargo component build
 ```
+
+#### Example
+How to add a pub/sub support with rust and wasmtime?
+
++ consider use wasi support io function
++ design a `pub/sub` protocol base tcp
++ use a wit file to describe `pub/sub` interface
++ use `wit-bindgen` generate host/guest code
++ impl `pub/sub` base host generate code with wasmtime
++ link `pub/sub` component to wasmtime
++ give a sdk use `wit-bindgen`(extend 'C')
++ write a guest crate to use `pub/sub` sdk
++ support run wasm with cmd or invoker
 
 Flow upcoming wasi-messaging version and impl Host function base tcp.
 
