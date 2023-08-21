@@ -2,7 +2,9 @@ use invoker::{InvokerContext, InvokerExecutable};
 use runtime::component::{Instance, InstancePre};
 use runtime::{AsContextMut, Context, Store, WasmtimeStore};
 use std::collections::HashMap;
+use std::sync::Arc;
 
+mod run;
 pub mod server;
 
 #[derive(thiserror::Error, Debug)]
@@ -20,8 +22,9 @@ pub enum InvokerGrpcError {
 pub type RuntimeData = ();
 
 /// Support a common rpc call with function service id.
+#[derive(Debug)]
 pub struct GrpcInvoker {
-    context: InvokerContext<Self>,
+    context: Arc<InvokerContext<Self>>,
     /// Rpc bind address.
     addr: String,
     /// Function service id map to component id.
@@ -35,7 +38,7 @@ impl InvokerExecutable for GrpcInvoker {
     type Error = InvokerGrpcError;
 
     async fn run(self) {
-        let _ = server::start(self).await;
+        let _ = server::start(Arc::new(self)).await;
     }
 
     // call context, first, fetch component from registry, secondly, instantiate_pre
@@ -53,6 +56,14 @@ impl InvokerExecutable for GrpcInvoker {
 }
 
 impl GrpcInvoker {
+    pub fn new(context: Arc<InvokerContext<Self>>) -> GrpcInvoker {
+        GrpcInvoker {
+            context,
+            addr: "".to_string(),
+            components_router: Default::default(),
+        }
+    }
+
     async fn execute(&self, service_id: &str, payload: String) -> Result<String, InvokerGrpcError> {
         // todo instance_pre should use multi times, so this method should out this scope
         let (instance_pre, store) = self.instantiate_pre(service_id).await.unwrap();

@@ -8,7 +8,7 @@ use std::sync::Arc;
 use tonic::transport::Server;
 use tonic::{Request, Response, Status};
 
-pub async fn start(invoker: GrpcInvoker) -> Result<(), InvokerGrpcError> {
+pub async fn start(invoker: Arc<GrpcInvoker>) -> Result<(), InvokerGrpcError> {
     let addr = invoker.addr.parse::<SocketAddr>().unwrap();
     let caller_service = CallerService::new(invoker);
     Server::builder()
@@ -24,10 +24,8 @@ pub struct CallerService {
 }
 
 impl CallerService {
-    pub fn new(invoker: GrpcInvoker) -> Self {
-        CallerService {
-            invoker: Arc::new(invoker),
-        }
+    pub fn new(invoker: Arc<GrpcInvoker>) -> Self {
+        CallerService { invoker }
     }
 }
 

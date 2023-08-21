@@ -4,7 +4,7 @@ mod test_module {
 
     const MODULE_NAME_A: &str = "test_module_a";
 
-    #[derive(Debug)]
+    #[derive(Debug, Clone)]
     struct TestModuleA;
 
     impl Module for TestModuleA {

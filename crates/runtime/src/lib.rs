@@ -9,6 +9,7 @@ mod host;
 mod registry;
 mod store;
 
+use std::fmt::{Debug, Formatter};
 // Re-export for the main demo, remove this later.
 pub use wasmtime::Store as WasmtimeStore;
 pub use wasmtime::*;
@@ -28,6 +29,12 @@ pub struct RuntimeEngine<T> {
     inner: Engine,
     // hold linker here.
     linker: component::Linker<T>,
+}
+
+impl<T> Debug for RuntimeEngine<T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        todo!()
+    }
 }
 
 // hold Config here

@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+micro-async-module = { path = "../../library/micro-async-module" }
 runtime = { path = "../runtime" }
 host-bindgen = { path = "../host-bindgen" }
 invoker = { path = "../invoker" }
