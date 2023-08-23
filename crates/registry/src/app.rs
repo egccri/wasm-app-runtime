@@ -10,9 +10,7 @@ use std::path::PathBuf;
 // path: sha256 of the warg generated, equal the path of content.
 pub struct App {
     name: String,
-    component_id: String,
-    // the path of component file
-    path: Option<PathBuf>,
+    uri: String,
 }
 
 pub struct AppStore {
@@ -51,16 +49,16 @@ impl<'a> AppStore {
         }
     }
 
+    /// Install app and download egccri modules component files.
     pub async fn install_app(app_name: &str) -> Result<App, RegistryError> {
         let mut app_store = APP_STORE
             .get()
             .ok_or_else(|| WargWrapperError("App store is not initial.".to_string()))?;
-        let app_path = app_store.warg_wrapper.download(app_name, None).await?;
         let app = App {
             name: app_name.to_string(),
-            component_id: "".to_string(),
-            path: Some(app_path),
+            uri: "".to_string(),
         };
+        let app_path = app_store.warg_wrapper.download(app_name, None).await?;
         // add app to the store
         Ok(app)
     }

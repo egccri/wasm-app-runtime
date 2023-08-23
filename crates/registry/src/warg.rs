@@ -4,7 +4,7 @@ use std::path::PathBuf;
 use warg_client::{ClientError, Config, FileSystemClient, StorageLockResult};
 use warg_protocol::VersionReq;
 
-/// Create when application started, hold by `OnceCell`
+/// Create when application started, hold by `APPSTORE`
 pub struct WargWrapper {
     config: WargConfig,
 }
@@ -28,7 +28,11 @@ impl WargWrapper {
     }
 
     pub fn create_client(&self) -> Result<FileSystemClient, ClientError> {
-        let config = self.map_client_config().unwrap();
+        let config = Config {
+            default_url: self.config.registry.clone(),
+            registries_dir: self.config.registries_dir.clone(),
+            content_dir: self.config.content_dir.clone(),
+        };
         match FileSystemClient::try_new_with_config(self.config.registry.as_deref(), &config)? {
             StorageLockResult::Acquired(client) => Ok(client),
             StorageLockResult::NotAcquired(path) => {
@@ -40,12 +44,6 @@ impl WargWrapper {
                 FileSystemClient::new_with_config(self.config.registry.as_deref(), &config)
             }
         }
-    }
-
-    // FIXME: Remove this config from file, add from `WargClientConfig`
-    pub fn map_client_config(&self) -> Result<Config, RegistryError> {
-        Config::from_file("../../../config/config.json")
-            .map_err(|err| RegistryError::WargWrapperError(err.to_string()))
     }
 
     pub async fn download(

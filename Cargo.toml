@@ -17,6 +17,7 @@ path = "src/bin/client.rs"
 members = [
     "crates/runtime",
     "crates/invoker",
+    "crates/module",
     "crates/registry",
     "crates/wasi-messaging",
     "crates/invoker-grpc",

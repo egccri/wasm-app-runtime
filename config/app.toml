@@ -1,0 +1,26 @@
+name = "app"
+author = "zifeng"
+version = "1.0"
+
+[[module]]
+name = "compoenent-a"
+default-compoennt = true
+
+[[module.invoker]]
+name = "grpc"
+router = "../call"
+
+[[module.invoker]]
+name = "messaging"
+topic = "topic-test"
+
+[[module]]
+name = "compoenent-a"
+default-compoennt = false
+components = ["http", "kv-sled"]
+
+[[module.invoker]]
+name = "grpc"
+
+[[module.invoker]]
+name = "messaging"
