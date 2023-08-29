@@ -4,6 +4,7 @@
 + Wasm
     - Core(Wasm设计目标，编译原理，堆栈机，抽象语法树)
         - 堆栈机器运行原理
+        - Wasmtime项目结构以及编译和虚拟机相关概念(wasmtime-runtime, InstanceHandle, VMContext)
     - Structure
         - WIP
             + function-references
@@ -26,6 +27,7 @@
         - Support a type in Wasmtime like resource
     - Binary Format
     - Wit
+    - Execution
     - Wasmtime Component Support
     - Application
         - Host-Guest
