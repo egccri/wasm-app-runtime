@@ -3,8 +3,9 @@
 
 + Wasm
     - Core(Wasm设计目标，编译原理，堆栈机，抽象语法树)
+        - [编译原理](compiler.md)
         - 堆栈机器运行原理
-        - Wasmtime项目结构以及编译和虚拟机相关概念(wasmtime-runtime, InstanceHandle, VMContext)
+        - [Wasmtime项目结构以及编译和虚拟机相关概念(wasmtime-runtime, InstanceHandle, VMContext)](wasmtime-compiler.md)
     - Structure
         - WIP
             + function-references
