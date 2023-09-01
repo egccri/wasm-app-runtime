@@ -2,13 +2,14 @@
 > This table has some ~~not implement features yet~~ and some _not stable implementation_.
 
 + Wasm
-    - Core(Wasm设计目标，编译原理，堆栈机，抽象语法树)
+    - Core(Wasm设计目标，编译原理，堆栈机)
         - [编译原理](compiler.md)
         - 堆栈机器运行原理
         - [Wasmtime项目结构以及编译和虚拟机相关概念(wasmtime-runtime, InstanceHandle, VMContext)](wasmtime-compiler.md)
     - Structure
         - WIP
             + function-references
+    - 指令集（非等长指令）
     - Binary Format, Encode
         - Rust编译到Wasm的过程
         - Wat
