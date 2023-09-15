@@ -19,6 +19,7 @@
     - Execution
         - [执行过程](core-execution.md)
         - [Wasmtime执行过程](wasmtime-core-execution.md)
+        - [内存的分配](memory.md)
     
 
 + _Component Model_

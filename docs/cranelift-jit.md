@@ -4,7 +4,18 @@
 
 https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/isle/docs/language-reference.md
 
+#### SSA
 
+
+
+#### 寄存器分配
+
+常见的寄存器分配方式有以下几种：
+
++ Basic: 一种增量的寄存器分配方法。
++ Fast: 调试构建的默认方法。
++ Greedy: 默认分配器。这是Basic分配器的一个高度调优的实现，它包含了全局活动范围分割。
++ PBQP: 基于分区布尔二次划分的寄存器分配器。
 
 #### Jit
 
