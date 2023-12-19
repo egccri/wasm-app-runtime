@@ -12,8 +12,8 @@ pub struct AppInstallReply {}
 /// Generated client implementations.
 pub mod app_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
-    use tonic::codegen::http::Uri;
     use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
     pub struct AppServiceClient<T> {
         inner: tonic::client::Grpc<T>,
@@ -57,8 +57,9 @@ pub mod app_service_client {
                     <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
                 >,
             >,
-            <T as tonic::codegen::Service<http::Request<tonic::body::BoxBody>>>::Error:
-                Into<StdError> + Send + Sync,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
         {
             AppServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -96,15 +97,23 @@ pub mod app_service_client {
         pub async fn install(
             &mut self,
             request: impl tonic::IntoRequest<super::AppInstallRequest>,
-        ) -> std::result::Result<tonic::Response<super::AppInstallReply>, tonic::Status> {
-            self.inner.ready().await.map_err(|e| {
-                tonic::Status::new(
-                    tonic::Code::Unknown,
-                    format!("Service was not ready: {}", e.into()),
-                )
-            })?;
+        ) -> std::result::Result<
+            tonic::Response<super::AppInstallReply>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
             let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static("/runtime_app.app_service/install");
+            let path = http::uri::PathAndQuery::from_static(
+                "/runtime_app.app_service/install",
+            );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("runtime_app.app_service", "install"));
@@ -147,7 +156,10 @@ pub mod app_service_server {
                 max_encoding_message_size: None,
             }
         }
-        pub fn with_interceptor<F>(inner: T, interceptor: F) -> InterceptedService<Self, F>
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
         where
             F: tonic::service::Interceptor,
         {
@@ -203,9 +215,15 @@ pub mod app_service_server {
                 "/runtime_app.app_service/install" => {
                     #[allow(non_camel_case_types)]
                     struct installSvc<T: AppService>(pub Arc<T>);
-                    impl<T: AppService> tonic::server::UnaryService<super::AppInstallRequest> for installSvc<T> {
+                    impl<
+                        T: AppService,
+                    > tonic::server::UnaryService<super::AppInstallRequest>
+                    for installSvc<T> {
                         type Response = super::AppInstallReply;
-                        type Future = BoxFuture<tonic::Response<Self::Response>, tonic::Status>;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
                         fn call(
                             &mut self,
                             request: tonic::Request<super::AppInstallRequest>,
@@ -238,14 +256,18 @@ pub mod app_service_server {
                     };
                     Box::pin(fut)
                 }
-                _ => Box::pin(async move {
-                    Ok(http::Response::builder()
-                        .status(200)
-                        .header("grpc-status", "12")
-                        .header("content-type", "application/grpc")
-                        .body(empty_body())
-                        .unwrap())
-                }),
+                _ => {
+                    Box::pin(async move {
+                        Ok(
+                            http::Response::builder()
+                                .status(200)
+                                .header("grpc-status", "12")
+                                .header("content-type", "application/grpc")
+                                .body(empty_body())
+                                .unwrap(),
+                        )
+                    })
+                }
             }
         }
     }

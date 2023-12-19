@@ -2,6 +2,7 @@ use crate::RegistryError;
 use serde::Deserialize;
 use std::path::PathBuf;
 use warg_client::{ClientError, Config, FileSystemClient, StorageLockResult};
+use warg_protocol::registry::PackageId;
 use warg_protocol::VersionReq;
 
 /// Create when application started, hold by `APPSTORE`
@@ -53,8 +54,12 @@ impl WargWrapper {
     ) -> Result<PathBuf, RegistryError> {
         let client = self.create_client().unwrap();
 
+        let package_id = PackageId::new(app_name).map_err(
+            |err| RegistryError::WargWrapperError(err.to_string())
+        )?;
+
         let res = client
-            .download(app_name, version.as_ref().unwrap_or(&VersionReq::STAR))
+            .download(&package_id, version.as_ref().unwrap_or(&VersionReq::STAR))
             .await?
             .ok_or_else(|| RegistryError::WargWrapperError("download failed".to_string()))?;
         Ok(res.path)
