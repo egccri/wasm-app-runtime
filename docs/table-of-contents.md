@@ -24,7 +24,7 @@
 
 + _Component Model_
     - Summary(history, define, module link, interface type, abi)
-        - [summary](component-model.md)
+        - [summary](component/component-model.md)
         - [abi](canonical-abi.md)
     - Types
         - Support a type in Wasmtime like resource

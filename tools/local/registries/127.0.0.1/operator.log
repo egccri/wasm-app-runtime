@@ -1,0 +1,17 @@
+{
+  "state": {
+    "algorithm": "sha256",
+    "head": {
+      "digest": "sha256:29c0afd716b02b4ff6eb68bb284d8335e0a1ccc5d47b910a453d5f519486f6f0",
+      "timestamp": "1686229264.780418000"
+    },
+    "permissions": {
+      "sha256:d6d9b4cd077a829c0275233bf3843c8294e250dfcc82b8ea15745e92982a820d": [
+        "commit"
+      ]
+    },
+    "keys": {
+      "sha256:d6d9b4cd077a829c0275233bf3843c8294e250dfcc82b8ea15745e92982a820d": "ecdsa-p256:A1OfZz5Y9Ny7VKPVwroCTQPAr9tmlI4U/UTYHZHA87AF"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "grpc-service",
+  "checkpoint": {
+    "contents": {
+      "logRoot": "sha256:79fe078e08141bc50dde59aee7a8735137c3291299d1e5df10b5e607d0b1014d",
+      "logLength": 4,
+      "mapRoot": "sha256:fa844ec478b69c2394168ec7b53c0c30793ef3442e19197ef11376321795c08e"
+    },
+    "keyId": "sha256:d6d9b4cd077a829c0275233bf3843c8294e250dfcc82b8ea15745e92982a820d",
+    "signature": "ecdsa-p256:MEUCIDXd7wo4zZw09BVVonBDIrIxT7AkL7kW3plN6LiYjju0AiEAoyjmLCdKmXMbGc7YbQhiJpAxrfR0AAIQFdqBQpoXrnA="
+  },
+  "state": {
+    "algorithm": "sha256",
+    "head": {
+      "digest": "sha256:ec561aa64800028ae01a1c2296c9b197ae0de4654441a39533f98d71b622e667",
+      "timestamp": "1686234876.985775000"
+    },
+    "permissions": {
+      "sha256:b71daca26dd85e70ea7ac044ba2d40ee452675c76aa3c2354b31d04eae1a65c3": [
+        "release",
+        "yank"
+      ]
+    },
+    "releases": {
+      "0.1.0": {
+        "recordId": "sha256:ec561aa64800028ae01a1c2296c9b197ae0de4654441a39533f98d71b622e667",
+        "version": "0.1.0",
+        "by": "sha256:b71daca26dd85e70ea7ac044ba2d40ee452675c76aa3c2354b31d04eae1a65c3",
+        "timestamp": "1686234876.985775000",
+        "state": {
+          "status": "released",
+          "content": "sha256:9ef55a1a926b9b4adc10dfec94a3ca247ab1acb8b6ed6a3283f9f63ea69b5a82"
+        }
+      }
+    },
+    "keys": {
+      "sha256:b71daca26dd85e70ea7ac044ba2d40ee452675c76aa3c2354b31d04eae1a65c3": "ecdsa-p256:A6ySIeIh8504jBZc25pnMcWBubxRSTz0zHN1EzB4UQ1x"
+    }
+  }
+}

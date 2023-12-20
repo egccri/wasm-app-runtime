@@ -20,7 +20,7 @@ Cargo.lock
 
 .idea
 
-/tools
+#/tools
 
 .DS_Store
 
