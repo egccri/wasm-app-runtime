@@ -5,7 +5,7 @@ cargo build --target wasm32-wasi
 
 
 export WARG_OPERATOR_KEY="ecdsa-p256:I+UlDo0HxyBBFeelhPPWmD+LnklOpqZDkrFP5VduASk="
-./warg-server --content-dir ~/content
+./warg-server --content-dir ./registry
 
 ./warg config --registry http://127.0.0.1:8090 --registries-dir ./local/registries --content-dir ./local/content ./local/config.json
 ./warg key new 127.0.0.1

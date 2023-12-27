@@ -10,6 +10,6 @@ pub struct ServerSetting {
 
 impl ServerSetting {
     pub fn new(config: Config) -> anyhow::Result<ServerSetting> {
-        config.try_deserialize().map_err(|err| anyhow!("{}", err))
+        config.try_deserialize().map_err(|err| anyhow!("Server setting deserialize error: {}", err))
     }
 }
